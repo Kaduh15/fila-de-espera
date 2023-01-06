@@ -1,0 +1,22 @@
+{
+  "name": "fila-de-espera",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "depend": "cd app && cd backend && npm install && cd ../frontend && npm install",
+    "start": "docker-compose up -d",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kaduh15/fila-de-espera.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kaduh15/fila-de-espera/issues"
+  },
+  "homepage": "https://github.com/Kaduh15/fila-de-espera#readme"
+}
