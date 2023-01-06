@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import prisma from "../prisma/client";
 import ApiError from "../utils/ApiError";
+import exclude from "../utils/exclude";
+import JWT from "../utils/token";
 
 export default class LoginService {
   private prisma: PrismaClient;
@@ -20,6 +22,8 @@ export default class LoginService {
       throw new ApiError("Invalid password", 400);
     }
 
-    return admin;
+    const adminWithoutPassword = exclude(admin, ["password"]);
+
+    return JWT.tokenGenerator(adminWithoutPassword);
   }
 }
