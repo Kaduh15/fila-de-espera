@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import md5 from "md5";
 import prisma from "../prisma/client";
 import ApiError from "../utils/ApiError";
 import exclude from "../utils/exclude";
@@ -12,9 +13,10 @@ export default class LoginService {
   }
 
   public async login(password: string) {
+    const passwordHash = md5(password)
     const admin = await this.prisma.admin.findFirst({
       where: {
-        password,
+        password: passwordHash,
       },
     });
 
@@ -22,8 +24,6 @@ export default class LoginService {
       throw new ApiError("Invalid password", 400);
     }
 
-    const adminWithoutPassword = exclude(admin, ["password"]);
-
-    return JWT.tokenGenerator(adminWithoutPassword);
+    return JWT.tokenGenerator(exclude(admin, ["password"]));
   }
 }
