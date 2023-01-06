@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  # web:
+  #   build: ./app/frontend
+  #   container_name: frontend
+  #   tty: true
+  #   stdin_open: true
+  #   restart: always
+  #   environment:
+  #     - APP_URL_SOCKET=http://localhost:3001
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - webchat_net
+
+  api:
+    build: ./app/backend/
+    container_name: backend
+    tty: true
+    stdin_open: true
+    restart: always
+    environment:
+      - PORT=3001
+    ports:
+      - 3001:3001
+    networks:
+      - net
+  
+  db:
+    image: mysql
+    container_name: db
+    platform: linux/x86_64
+    restart: always
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge

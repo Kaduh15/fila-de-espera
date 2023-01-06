@@ -3,7 +3,7 @@ import HttpError from '../utils/ApiError';
 
 function errorMiddleware(
   error: HttpError,
-  request: Request,
+  _request: Request,
   response: Response,
   _next: NextFunction,
 ) {
