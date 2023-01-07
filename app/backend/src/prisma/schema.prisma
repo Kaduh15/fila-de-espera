@@ -11,12 +11,12 @@ datasource db {
 }
 
 model admin {
-  id       Int    @id @default(autoincrement())
+  id       String    @id @default(uuid())
   password String
 }
 
 model waiting_line {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   customer String
   date DateTime @default(now())
   initial_service DateTime?
