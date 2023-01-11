@@ -7,7 +7,6 @@ function errorMiddleware(
   response: Response,
   _next: NextFunction,
 ) {
-  console.log("🚀 ~ file: ErrorMiddleware.ts:12 ~ error", error)
   const status = error.status || 500;
   const message = error.message || 'Something went wrong';
 

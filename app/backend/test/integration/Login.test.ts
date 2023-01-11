@@ -3,8 +3,8 @@ import sinon from 'sinon';
 import chai from 'chai';
 
 import { app } from '../../src/app';
-import prisma from '../../src/prisma/client';
 import JWT from '../../src/utils/token';
+import { resetAdmin, restoreDB } from '../utils/restoreDB';
 
 chai.use(chaiHttp);
 
@@ -13,13 +13,11 @@ const { expect, request } = chai;
 describe('Login Router', () => {
   describe('POST /login', () => {
     after(() => {
-      sinon.restore();
+      restoreDB();
     })
 
     it('should return 200 when login is successful', async () => {
-      sinon
-        .stub(prisma.admin, 'findFirst')
-        .resolves({ id: 1, password: '123' });
+      resetAdmin();
 
       sinon
         .stub(JWT, 'tokenGenerator')
@@ -33,6 +31,8 @@ describe('Login Router', () => {
       expect(body).to.deep.equal({
         token: 'Valido'
       });
+
+      sinon.restore();
     })
   })
 });
