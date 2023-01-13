@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { ZodAny } from "zod";
 
 import ApiError from '../utils/ApiError';
 
-const bodyValidation = (bodySchema: ZodAny) => (req: Request, _res: Response, next: NextFunction) => {
-  const validation = bodySchema.safeParse(req.body);
+const bodyValidation = (bodySchema: any) => (req: Request, _res: Response, next: NextFunction) => {
+  const validation = bodySchema.safaParse(req.body);
+  console.log("🚀 ~ file: bodyValidationMiddleware.ts:7 ~ bodyValidation ~ validation", validation)
 
   if (!validation.success) {
     throw new ApiError(validation.error.message, 400);
@@ -13,4 +13,4 @@ const bodyValidation = (bodySchema: ZodAny) => (req: Request, _res: Response, ne
   next();
 };
 
-module.exports = bodyValidation;
+export default bodyValidation;

@@ -18,7 +18,7 @@ model admin {
 model waiting_line {
   id String @id @default(uuid())
   customer String
-  date DateTime @default(now())
+  createdAt DateTime @default(now())
   initial_service DateTime?
   finish_service DateTime?
 }
