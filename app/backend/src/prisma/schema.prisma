@@ -10,25 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-<<<<<<< HEAD:app/backend/prisma/schema.prisma
 model Admin {
   id       Int @id @default(autoincrement())
-=======
-model admin {
-  id       String    @id @default(uuid())
->>>>>>> origin/developer:app/backend/src/prisma/schema.prisma
   password String
 
   @@map("admin")
 }
 
-<<<<<<< HEAD:app/backend/prisma/schema.prisma
 model WaitingLine {
   id        String @id @default(uuid())
-=======
-model waiting_line {
-  id String @id @default(uuid())
->>>>>>> origin/developer:app/backend/src/prisma/schema.prisma
   customer String
   createdAt DateTime @default(now()) @map("created_at")
   initialServiceTime DateTime @db.Timestamp @map("initial_service_time")

@@ -2,9 +2,11 @@ import { hashSync } from 'bcrypt';
 import prisma from './client';
 
 async function main() {
-  const admin = await prisma.admin.create({
-    data: {
-      password: hashSync('123456', 10),
+  const admin = await prisma.admin.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      password: hashSync('password', 10),
     },
   });
 
