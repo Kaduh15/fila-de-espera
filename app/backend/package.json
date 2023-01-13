@@ -2,6 +2,20 @@
   "name": "backend",
   "version": "0.0.1",
   "description": "",
+<<<<<<< HEAD
+=======
+  "main": "./dist/server.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npx tsc && node .",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "test": "mocha --require ts-node/register 'test/**/*.{spec,test}.ts'"
+  },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+  },
+  "keywords": [],
+>>>>>>> origin/developer
   "author": "",
   "private": true,
   "license": "UNLICENSED",
