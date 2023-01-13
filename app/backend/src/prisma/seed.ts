@@ -6,7 +6,7 @@ async function main() {
     where: { id: 1 },
     update: {},
     create: {
-      password: hashSync('password', 10),
+      password: hashSync('123456', 10),
     },
   });
 
