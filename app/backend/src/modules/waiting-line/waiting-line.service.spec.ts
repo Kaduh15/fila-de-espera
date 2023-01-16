@@ -117,4 +117,56 @@ describe('WaitingLineService', () => {
       expect(result).toBe(clientOutput);
     });
   });
+
+  describe('absent', () => {
+    it('should throw an error if the ID is invalid', async () => {
+      const id = 'invalid-id';
+      jest
+        .spyOn(prisma.waitingLine, 'findUnique')
+        .mockImplementation(() => null);
+
+      try {
+        await service.absent(id);
+      } catch (error) {
+        expect(error.message).toBe('Invalid ID');
+        expect(error.status).toBe(400);
+      }
+    });
+    it('should throw an error if the status is not WAITING', async () => {
+      const id = 'valid-id';
+      const client = {
+        status: 'FINISHED',
+      } as unknown as WaitingLine;
+
+      jest.spyOn(prisma.waitingLine, 'findUnique').mockResolvedValue(client);
+
+      try {
+        await service.absent(id);
+      } catch (error) {
+        expect(error.message).toBe('Invalid status');
+        expect(error.status).toBe(400);
+      }
+    });
+    it('should update the status to ABSENT', async () => {
+      const id = 'valid-id';
+
+      const clientInput = {
+        status: 'WAITING',
+      } as unknown as WaitingLine;
+
+      const clientOutput = {
+        status: 'ABSENT',
+      } as unknown as WaitingLine;
+
+      jest
+        .spyOn(prisma.waitingLine, 'findUnique')
+        .mockResolvedValue(clientInput);
+
+      jest.spyOn(prisma.waitingLine, 'update').mockResolvedValue(clientOutput);
+
+      const result = await service.absent(id);
+
+      expect(result).toBe(clientOutput);
+    });
+  });
 });

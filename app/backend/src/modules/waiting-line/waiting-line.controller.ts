@@ -52,4 +52,9 @@ export class WaitingLineController {
   async finishService(@Param('id') id: string) {
     return await this.waitingLineService.finishService(id);
   }
+
+  @Patch(':id/absent')
+  async absent(@Param('id') id: string) {
+    return await this.waitingLineService.absent(id);
+  }
 }
