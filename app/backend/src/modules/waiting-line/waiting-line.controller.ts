@@ -47,4 +47,9 @@ export class WaitingLineController {
   async startService(@Param('id') id: string) {
     return await this.waitingLineService.startService(id);
   }
+
+  @Patch(':id/finish')
+  async finishService(@Param('id') id: string) {
+    return await this.waitingLineService.finishService(id);
+  }
 }

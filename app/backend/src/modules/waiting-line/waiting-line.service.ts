@@ -55,4 +55,21 @@ export class WaitingLineService {
       },
     });
   }
+  async finishService(id: string) {
+    const isIdValid = await this.prisma.waitingLine.findUnique({
+      where: { id },
+    });
+
+    if (!isIdValid) throw new HttpException('Invalid ID', 400);
+    if (isIdValid.status !== 'IN_PROGRESS')
+      throw new HttpException('Invalid status', 400);
+
+    return await this.prisma.waitingLine.update({
+      where: { id },
+      data: {
+        status: 'FINISHED',
+        finishedServiceTime: new Date(),
+      },
+    });
+  }
 }
