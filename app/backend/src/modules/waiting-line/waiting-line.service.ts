@@ -1,5 +1,5 @@
 import { PrismaService } from './../../database/PrismaService';
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateWaitingLineDto } from './dto/create-waiting-line.dto';
 import { UpdateWaitingLineDto } from './dto/update-waiting-line.dto';
 
@@ -25,8 +25,8 @@ export class WaitingLineService {
     });
   }
 
-  update(id: string, updateWaitingLineDto: UpdateWaitingLineDto) {
-    return this.prisma.waitingLine.update({
+  async update(id: string, updateWaitingLineDto: UpdateWaitingLineDto) {
+    return await this.prisma.waitingLine.update({
       where: { id },
       data: updateWaitingLineDto,
     });
@@ -35,6 +35,24 @@ export class WaitingLineService {
   remove(id: string) {
     return this.prisma.waitingLine.delete({
       where: { id },
+    });
+  }
+
+  async startService(id: string) {
+    const isIdValid = await this.prisma.waitingLine.findUnique({
+      where: { id },
+    });
+
+    if (!isIdValid) throw new HttpException('Invalid ID', 400);
+    if (isIdValid.status !== 'WAITING')
+      throw new HttpException('Invalid status', 400);
+
+    return await this.prisma.waitingLine.update({
+      where: { id },
+      data: {
+        status: 'IN_PROGRESS',
+        initialServiceTime: new Date(),
+      },
     });
   }
 }

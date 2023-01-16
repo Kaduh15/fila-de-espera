@@ -42,4 +42,9 @@ export class WaitingLineController {
   remove(@Param('id') id: string) {
     return this.waitingLineService.remove(id);
   }
+
+  @Patch(':id/start')
+  async startService(@Param('id') id: string) {
+    return await this.waitingLineService.startService(id);
+  }
 }

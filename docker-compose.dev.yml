@@ -46,8 +46,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
     ports:
-      - 3306:3306
-      - 33060:33060
+      - 3002:3306
+      - 30020:33060
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 10s
