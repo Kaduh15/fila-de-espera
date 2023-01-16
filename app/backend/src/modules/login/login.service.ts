@@ -9,7 +9,7 @@ import JWT from 'src/utils/token';
 export class LoginService {
   constructor(private prisma: PrismaService) {}
 
-  async login({ password }: Login) {
+  async login({ password }: Login, ip: string) {
     const isAdmin = await this.prisma.admin.findUnique({
       where: {
         id: 1,
@@ -20,6 +20,6 @@ export class LoginService {
       throw new ApiError(`Password is incorrect`, 400);
     }
 
-    return JWT.tokenGenerator({ id: isAdmin.id });
+    return JWT.tokenGenerator({ id: isAdmin.id, ip });
   }
 }

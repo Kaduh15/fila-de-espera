@@ -27,5 +27,9 @@
   "bugs": {
     "url": "https://github.com/Kaduh15/fila-de-espera/issues"
   },
-  "homepage": "https://github.com/Kaduh15/fila-de-espera#readme"
+  "homepage": "https://github.com/Kaduh15/fila-de-espera#readme",
+  "devDependencies": {
+    "commitlint": "^17.4.2",
+    "commitlint-config-gitmoji": "^2.2.10"
+  }
 }
