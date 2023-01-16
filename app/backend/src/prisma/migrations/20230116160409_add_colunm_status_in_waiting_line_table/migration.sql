@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `waiting_line` ADD COLUMN `status` ENUM('WAITING', 'SERVING', 'FINISHED', 'ABSENT') NOT NULL DEFAULT 'WAITING';

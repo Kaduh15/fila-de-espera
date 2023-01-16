@@ -5,7 +5,7 @@ import {
   NestMiddleware,
 } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import JWT from 'src/utils/token';
+import JWT from '../../utils/token';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {

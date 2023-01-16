@@ -1,7 +1,10 @@
 export class WaitingLine {
-  id?: number;
+  id: string;
   customer: string;
+  status: Status;
   createdAt: Date;
-  initialServiceTime: Date;
-  finishedServiceTime: Date;
+  initialServiceTime: Date | null;
+  finishedServiceTime: Date | null;
 }
+
+export type Status = 'WAITING' | 'IN_PROGRESS' | 'FINISHED' | 'ABSENT';
