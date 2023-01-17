@@ -1,3 +1,3 @@
 export class CreateWaitingLineDto {
-  customer: string;
+  name: string;
 }

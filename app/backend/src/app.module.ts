@@ -1,20 +1,12 @@
-import { AuthMiddleware } from './middlewares/auth/auth.middleware';
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LoginModule } from './modules/login/login.module';
 import { WaitingLineModule } from './modules/waiting-line/waiting-line.module';
-import { WaitingLineController } from './modules/waiting-line/waiting-line.controller';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 @Module({
-  imports: [LoginModule, WaitingLineModule],
+  imports: [WaitingLineModule, AuthModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthMiddleware)
-      .exclude({ path: 'waiting-line', method: RequestMethod.GET })
-      .forRoutes(WaitingLineController);
-  }
-}
+export class AppModule {}

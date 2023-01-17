@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "@nestjs/mapped-types": "*"
+  },
   "name": "fila-de-espera",
   "version": "1.0.0",
   "description": "",
