@@ -92,4 +92,21 @@ export class WaitingLineService {
       },
     });
   }
+
+  async findToday() {
+    const result = await this.prisma.waitingLine.findMany({
+      where: {
+        createdAt: {
+          gt: new Date(new Date().setHours(0, 0, 0, 0)),
+          lte: new Date(new Date().setHours(23, 59, 59, 999)),
+        },
+      },
+    });
+    console.log(
+      '🚀 ~ file: waiting-line.service.ts:102 ~ WaitingLineService ~ findToday ~ result',
+      result,
+    );
+
+    return result;
+  }
 }
