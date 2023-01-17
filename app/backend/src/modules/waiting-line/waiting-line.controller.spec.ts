@@ -1,4 +1,4 @@
-import { PrismaService } from './../../database/PrismaService';
+import { PrismaService } from '../../prisma/PrismaService';
 import { Test, TestingModule } from '@nestjs/testing';
 import { WaitingLineController } from './waiting-line.controller';
 import { WaitingLineService } from './waiting-line.service';

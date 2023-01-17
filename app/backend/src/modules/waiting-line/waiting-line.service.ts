@@ -1,4 +1,4 @@
-import { PrismaService } from './../../database/PrismaService';
+import { PrismaService } from '../../prisma/PrismaService';
 import { HttpException, Injectable } from '@nestjs/common';
 import { CreateWaitingLineDto } from './dto/create-waiting-line.dto';
 import { UpdateWaitingLineDto } from './dto/update-waiting-line.dto';
@@ -9,7 +9,9 @@ export class WaitingLineService {
 
   create(createWaitingLineDto: CreateWaitingLineDto) {
     return this.prisma.waitingLine.create({
-      data: createWaitingLineDto,
+      data: {
+        name: createWaitingLineDto.name,
+      },
     });
   }
 

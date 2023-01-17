@@ -11,16 +11,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin {
-  id       Int    @id @default(autoincrement())
+model User {
+  id Int @id @default(autoincrement())
+
+  email    String @unique
   password String
 
-  @@map("admin")
+  name String
+
+  role Role @default(USER)
+
+  @@map("users")
 }
 
 model WaitingLine {
-  id                  String    @id @default(uuid())
-  customer            String
+  id String @id @default(uuid())
+
+  name                String    @map("user_id")
   status              Status    @default(WAITING)
   createdAt           DateTime  @default(now()) @map("created_at")
   initialServiceTime  DateTime? @map("initial_service_time")
@@ -34,4 +41,9 @@ enum Status {
   IN_PROGRESS
   FINISHED
   ABSENT
+}
+
+enum Role {
+  USER
+  ADMIN
 }
