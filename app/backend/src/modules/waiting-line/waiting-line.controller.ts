@@ -25,6 +25,11 @@ export class WaitingLineController {
     return this.waitingLineService.findAll();
   }
 
+  @Get('today')
+  async findToday() {
+    return await this.waitingLineService.findToday();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.waitingLineService.findOne(id);

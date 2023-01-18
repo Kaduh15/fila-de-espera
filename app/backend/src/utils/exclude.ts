@@ -1,9 +1,9 @@
 export default function exclude<User, Key extends keyof User>(
   user: User,
-  keys: Key[]
+  keys: Key[],
 ): Omit<User, Key> {
-  for (let key of keys) {
-    delete user[key]
+  for (const key of keys) {
+    delete user[key];
   }
-  return user
+  return user;
 }

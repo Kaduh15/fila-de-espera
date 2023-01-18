@@ -1,6 +1,6 @@
 export class WaitingLine {
   id: string;
-  customer: string;
+  name: string;
   status: Status;
   createdAt: Date;
   initialServiceTime: Date | null;
