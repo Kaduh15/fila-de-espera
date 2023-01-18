@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "@nestjs/mapped-types": "*"
+  },
   "name": "fila-de-espera",
   "version": "1.0.0",
   "description": "",
@@ -9,6 +12,7 @@
     "compose:up": "docker-compose -f docker-compose.yml up -d --build",
     "compose:down": "docker-compose -f docker-compose.yml down --remove-orphans",
     "db:permission": "sudo chmod 777 -R app/backend/db",
+    "db:delete": "sudo rm -rf app/backend/db",
     "prestart": "npm i && cd app/frontend && npm i && cd ../backend && npm i && cd ../../",
     "start:front:dev": "cd app/frontend && npm run dev",
     "start:back:dev": "cd app/backend && npm run dev",
@@ -26,5 +30,9 @@
   "bugs": {
     "url": "https://github.com/Kaduh15/fila-de-espera/issues"
   },
-  "homepage": "https://github.com/Kaduh15/fila-de-espera#readme"
+  "homepage": "https://github.com/Kaduh15/fila-de-espera#readme",
+  "devDependencies": {
+    "commitlint": "^17.4.2",
+    "commitlint-config-gitmoji": "^2.2.10"
+  }
 }

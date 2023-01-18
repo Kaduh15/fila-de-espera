@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  email    String @unique
+  password String
+
+  name String
+
+  role Role @default(USER)
+
+  @@map("users")
+}
+
+model WaitingLine {
+  id String @id @default(uuid())
+
+  name                String    @map("user_id")
+  status              Status    @default(WAITING)
+  createdAt           DateTime  @default(now()) @map("created_at")
+  initialServiceTime  DateTime? @map("initial_service_time")
+  finishedServiceTime DateTime? @map("finished_service_time")
+
+  @@map("waiting_line")
+}
+
+enum Status {
+  WAITING
+  IN_PROGRESS
+  FINISHED
+  ABSENT
+}
+
+enum Role {
+  USER
+  ADMIN
+}
